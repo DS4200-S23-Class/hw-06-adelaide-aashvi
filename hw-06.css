@@ -1,0 +1,53 @@
+head{
+  font-family: Arial;
+}
+
+.centered {
+    text-align: center;
+}
+
+body {
+    font-family: Arial; 
+    background-color: lavenderblush;
+}
+
+h2 {
+  color: hotpink;
+  text-align: center
+}
+
+.container {
+  display:flex;
+}
+
+.left_column {
+  width: 33.3%;
+  float: left;
+  min-height: 400px;
+}
+
+.middle_column {
+  width: 33.3%;
+  float: left;
+  min-height: 400px;
+}
+
+.right_column {
+  width: 33.3%;
+  float: left;
+  min-height: 400px;
+}
+
+/* Clear floats after the columns */
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+  #Acknowledgements {
+ padding-top: 5%;
+ clear: both;
+ text-align: left;
+}
+ 
