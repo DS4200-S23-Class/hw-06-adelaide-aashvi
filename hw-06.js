@@ -40,7 +40,7 @@ function colors(type) {
 
  function plot_scatter_1() {
 
-  d3.csv("/data/iris.csv").then((data) => {
+  d3.csv("data/iris.csv").then((data) => {
   const MAX_X6 = d3.max(data, (d) => { return parseInt(d.Petal_Length)});
   const X_SCALE6 = d3.scaleLinear() 
                       .domain([0, 8])  
@@ -81,7 +81,7 @@ plot_scatter_1();
 
 function plot_scatter_2() {
 
-  d3.csv("/data/iris.csv").then((data) => {
+  d3.csv("data/iris.csv").then((data) => {
   const MAX_X6 = d3.max(data, (d) => { return parseInt(d.Petal_Width)});
   const X_SCALE6 = d3.scaleLinear() 
                       .domain([0, 5])  
@@ -122,7 +122,7 @@ plot_scatter_2();
 
 function plot_bar() {
 
-  d3.csv("/data/iris.csv").then((data) => {
+  d3.csv("data/iris.csv").then((data) => {
 		const X_SCALE6 = d3.scaleBand()
 						.range([0, VIS_WIDTH + 1])
 						.domain(data.map(function(d) {return d.Species}))
