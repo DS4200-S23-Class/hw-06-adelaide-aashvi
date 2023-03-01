@@ -51,7 +51,7 @@ function colors(type) {
                       .domain([0, 7])  
                       .range([VIS_HEIGHT, 0]); 
 
-  FRAME1.selectAll("points")  
+  points_1 = FRAME1.selectAll("points")  
         .data(data) // passed from .then  
         .enter()       
         .append("circle")  
@@ -92,7 +92,7 @@ function plot_scatter_2() {
                       .domain([0, 3])  
                       .range([VIS_HEIGHT, 0]); 
 
-  FRAME2.selectAll("points")  
+  points_2 = FRAME2.selectAll("points")  
         .data(data) // passed from .then  
         .enter()       
         .append("circle")  
@@ -115,6 +115,26 @@ function plot_scatter_2() {
             .call(d3.axisLeft(Y_SCALE6).ticks(10))
             .attr("font-size", "15px");
 
+	FRAME2.call(d3.brush()
+             .extent([[0,0], [FRAME_WIDTH, FRAME_HEIGHT]])
+             .on("start brush", update))
+             .on("end", () => { });
+
+function update(event) {
+	let extent = event.selection;
+	points_1.classed("selected", function(d){ return isBrushed(extent, X_SCALE6(d.Sepal_Width) + MARGINS.left, Y_SCALE6(d.Petal_Width) + MARGINS.top)} )
+	points_2.classed("selected", function(d){ return isBrushed(extent, X_SCALE6(d.Sepal_Width) + MARGINS.left, Y_SCALE6(d.Petal_Width) + MARGINS.top)} )
+	bar.classed("selected", function(d){ return isBrushed(extent, X_SCALE6(d.Sepal_Width) + MARGINS.left, Y_SCALE6(d.Petal_Width) + MARGINS.top)} )
+}
+
+function isBrushed(brush_coords, cx, cy) {
+       var x0 = brush_coords[0][0],
+           x1 = brush_coords[1][0],
+           y0 = brush_coords[0][1],
+           y1 = brush_coords[1][1];
+      return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+}
+
 	});
 }
 
@@ -131,7 +151,7 @@ function plot_bar() {
 							.domain([0, 60])
 							.range([VIS_HEIGHT, 0]);
 		
-		FRAME3.selectAll(".bar")
+		bar = FRAME3.selectAll(".bar")
 			  .data(data)
 			  .enter()
 			  .append('rect')
